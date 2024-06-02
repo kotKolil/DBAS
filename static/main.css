@@ -1,0 +1,66 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    color: darkslateblue;
+}
+
+.tables-navbar {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    overflow-x: hidden;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 5vh;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+    background-color: #C5F5AE;
+    padding: 3px;
+    gap: 5px;
+}
+
+.table-card {
+    color: darkslateblue;
+    max-height: 5vh;
+    padding: 3px;
+    min-width: 50px;
+    width: fit-content;
+    background-color: #D2F662;
+}
+
+.raw-sql-bar {
+    display: flex;
+    justify-content: left;
+    padding: 5px;
+    min-height: 5vh;
+    gap: 5px;
+}
+
+.raw-sql-bar input {
+    border-bottom: 3px black solid;
+}
+
+.raw-sql-bar button {
+    color: darkslateblue;
+    background-color: #D2F662;
+    min-width: fit-content;
+    border-radius: 5%;
+}
+
+.data-table-wrappper {
+    height: 100vh;
+    flex-grow: 1;
+}
+
+.data-table-wrappper table {
+    width: 100%;
+}
+
+.data-table-wrappper .tr {
+    border: 1px black solid;
+}
+
+.data-table-wrappper .td {
+    border: 1px black solid;
+}
