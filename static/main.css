@@ -45,22 +45,29 @@ body {
     color: darkslateblue;
     background-color: #D2F662;
     min-width: fit-content;
-    border-radius: 5%;
+    border-radius: 15%;
 }
 
-.data-table-wrappper {
-    height: 100vh;
+.data-table-wrapper {
+    padding-top: 5vh;
+    height: fit-content;
+    display: flex;
+    justify-content: left;
     flex-grow: 1;
+    flex-direction: row;
 }
 
-.data-table-wrappper table {
-    width: 100%;
-}
-
-.data-table-wrappper .tr {
+.column {
+    display: inline-block;
+    flex-direction: column;
+    width: fit-content;
     border: 1px black solid;
 }
 
-.data-table-wrappper .td {
+.row {
+    width: fit-content;
     border: 1px black solid;
+    min-width: 3vw;
+    box-sizing: border-box;
+    padding: 7px;
 }
