@@ -2,6 +2,8 @@
 from fastapi import *
 from fastapi.responses import *
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import *
+from os import *
 
 #local classes
 from settings import *
@@ -33,18 +35,18 @@ def AllTablesGet():
     match TypeOfDb:
         case "sqlite3":
             with engine.connect() as con:
+                rs = con.execute(text("SELECT name FROM sqlite_master WHERE type = 'table'; "))
+                tables = [row[0] for row in rs]
+                return JSONResponse(content=tables)
 
-                rs = con.execute("SELECT name FROM sqlite_master WHERE type=’table’;")
-                return JSONResponse(rs)
-            
         case "postgres":
             with engine.connect() as con:
-
-                rs = con.execute("SELECT * FROM pg_catalog.pg_tables;")
-                return JSONResponse(rs)
+                rs = con.execute(text("SELECT tablename FROM pg_catalog.pg_tables;"))
+                tables = [row[0] for row in rs]
+                return JSONResponse(content=tables)
         
         case _:
-            return JSONResponse(["TypeError: Unknown type of DB"], status=500)
+            return JSONResponse(content=["TypeError: Unknown type of DB"], status_code=500)
         
     
 @app.post("/api/RawSQL")

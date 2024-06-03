@@ -1,11 +1,17 @@
+<!DOCTYPE HTML>
+
 <html>
 
 <head>
+    <title>DBAS</title>
+    <link rel="shortcut icon" href="/static/favicon.ico" />
     <link rel="stylesheet" href="/static/main.css">
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="static/main.js">
+    </script>
 </head>
 
-<body>
+<body onload="AddTablesToNavBar();">
     <div class="tables-navbar">
 
         <!-- here names of data tables -->
@@ -14,7 +20,7 @@
 
     <div class="raw-sql-bar">
         <!-- CRUD navbar -->
-        <input type="text" placeholder="enter your sql request"> </input>
+        <input type="text" placeholder="enter your sql request" class="RawSQLInput" onfocus="IsInputActive = true" onblur="IsInputActive = false"> </input>
         <button>CREATE</button>
         <button>READ</button>
         <button>UPDATE</button>
@@ -25,8 +31,12 @@
     <div class="data-table-wrapper">
 
         <!-- table of data from table in database -->
-        
-        
+        <div class="column">
+
+
+
+        </div>
+
 
     </div>
 
