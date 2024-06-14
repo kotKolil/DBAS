@@ -11,7 +11,7 @@
     </script>
 </head>
 
-<body onload="GetDataForTable();AddTablesToNavBar();">
+<body onload="AddTablesToNavBar();">
     <div class="tables-navbar">
 
         <!-- here names of data tables -->
@@ -21,10 +21,7 @@
     <div class="raw-sql-bar">
         <!-- CRUD navbar -->
         <input type="text" placeholder="enter your sql request" class="RawSQLInput" onfocus="IsInputActive = true" onblur="IsInputActive = false"> </input>
-        <button onclick="NewWindowCUD('CREATE');">CREATE</button>
-        <button onclick="ReadTable(CurrentTable);">READ</button>
-        <button onclick="NewWindowCUD('UPDATE');">UPDATE</button>
-        <button onclick="NewWindowCUD('DELETE');">DELETE</button>
+        <button onclick="ReadTable(CurrentTable);">Update Current Table</button>
 
     </div>
 

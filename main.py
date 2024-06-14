@@ -56,8 +56,9 @@ async def GetTableInfo(request:Request):
     match TypeOfDb:
         case "sqlite3":
                 with engine.connect() as con:
-                    rs = con.execute(text(f"PRAGMA table_info({NameOfTable});"))
-                    print([row for row in rs])
+                    rs = con.execute(text(f""" SELECT c.name FROM pragma_table_info('{NameOfTable}') c; """))
+                    return JSONResponse(content = [row[0] for row in rs])
+
         case "postgres":
             pass
         case _:

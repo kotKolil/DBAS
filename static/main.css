@@ -53,14 +53,4 @@ th {
     color: darkslateblue;
     background-color: #D2F662;
     min-width: fit-content;
-    border-radius: 15%;
-}
-
-.pop-up-window {
-    z-index: 999;
-    width: 45vw;
-    height: 30vh;
-    padding-left: auto;
-    padding-right: auto;
-    border: 3px black solid;
 }

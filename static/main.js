@@ -1,6 +1,5 @@
 var IsInputActive = false
 var CurrentTable = ""
-var CurrentOperation = ""
 
 const AddTablesToNavBar = async function() {
     console.log("What you are looking for in console?")
@@ -25,26 +24,50 @@ const AddTablesToNavBar = async function() {
     CurrentTable = json[0]
 
     console.log(CurrentTable)
+
+    GetDataForTable(CurrentTable)
+
 }
 
-const AddDataToTable = function(arr) {
-    table = document.querySelector(".")
-}
 
-const GetDataForTable = async function() {
+const GetDataForTable = async function(CurrentTable) {
 
 
     var response = await fetch(`http://${location.host}/api/GetAllTables`)
     let h7JH = await response.json();
 
-    console.log("я ебу собак")
     var DataTable = document.querySelector(".DataTable")
     var SqlQuery = `SELECT * FROM ${h7JH[0]}`
     console.log(CurrentTable)
     console.log(SqlQuery)
 
 
+    //getting name of columns via API
+    console.log(`running from AddDataFromTable ${CurrentTable}`)
 
+    var response = await fetch(`http://${location.host}/api/GetTableInfo`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        }, // Add headers to specify JSON content type
+        body: JSON.stringify({
+            name: CurrentTable,
+        }),
+    })
+
+    var data = await response.json();
+    console.log("logging data of table columns")
+    console.log(data)
+    var elementAAA = document.createElement("tr")
+    data.forEach((TableName) => {
+        var valueAAA = document.createElement("td")
+        valueAAA.innerHTML = TableName
+        elementAAA.appendChild(valueAAA)
+    })
+
+    DataTable.appendChild(elementAAA)
+
+    //getting data from table
     var response = await fetch(`http://${location.host}/api/RawSQL`, {
         method: "POST",
         headers: {
@@ -115,13 +138,40 @@ window.addEventListener("keydown", async(e) => {
 
 const ReadTable = async function(NameOfTable) {
 
-    console.log("я ебу собак")
     var DataTable = document.querySelector(".DataTable")
     var SqlQuery = `SELECT * FROM ${NameOfTable}`
     console.log(CurrentTable)
     console.log(SqlQuery)
 
     DataTable.innerHTML = ""
+
+
+    //getting name of columns via API
+    console.log(`running from AddDataFromTable ${CurrentTable}`)
+
+    var response = await fetch(`http://${location.host}/api/GetTableInfo`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        }, // Add headers to specify JSON content type
+        body: JSON.stringify({
+            name: CurrentTable,
+        }),
+    })
+
+    var data = await response.json();
+    console.log("logging data of table columns")
+    console.log(data)
+    var elementAAA = document.createElement("tr")
+    data.forEach((TableName) => {
+        var valueAAA = document.createElement("td")
+        valueAAA.innerHTML = TableName
+        elementAAA.appendChild(valueAAA)
+    })
+
+    DataTable.appendChild(elementAAA)
+
+
 
 
     var response = await fetch(`http://${location.host}/api/RawSQL`, {
@@ -146,32 +196,5 @@ const ReadTable = async function(NameOfTable) {
         )
         DataTable.appendChild(elementAAA)
     })
-
-}
-
-const NewWindowCUD = async function(TypeOfOperation) {
-
-    CurrentOperation = TypeOfOperation
-
-    //creating windows
-    var NewDiv = document.createElement("div")
-    NewDiv.className = "pop-up-window"
-
-    NewDiv.innerHTML = `Insert data for ${CurrentOperation}`
-
-
-    // var response = await fetch(`${location.host}/api/GetTableInfo?name=${CurrentTable}`)
-    // var data = await response.json()
-    // var NumOfRow = data["NumOfRow"]
-
-    // for (var j = 0; j < NumOfRow; i++) {
-    //     var input = document.createElement("input")
-    //     NewDiv.appendChild(input)
-    // }
-
-
-    document.body.append(NewDiv)
-
-
 
 }
