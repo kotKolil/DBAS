@@ -1,6 +1,7 @@
 var IsInputActive = false
 var CurrentTable = ""
 
+// this function adding name of table to navbar
 const AddTablesToNavBar = async function() {
     console.log("What you are looking for in console?")
     let elem = document.querySelector(".tables-navbar");
@@ -14,6 +15,8 @@ const AddTablesToNavBar = async function() {
         div.onclick = () => {
             console.log("clicked")
             CurrentTable = element;
+            CurrentTableElem = document.getElementById("CurrentTable");
+            CurrentTableElem.innerHTML = CurrentTable;
         }
 
         elem.appendChild(div)
@@ -23,6 +26,9 @@ const AddTablesToNavBar = async function() {
 
     CurrentTable = json[0]
 
+    CurrentTableElem = document.getElementById("CurrentTable")
+    CurrentTableElem.innerHTML = CurrentTable
+
     console.log(CurrentTable)
 
     GetDataForTable(CurrentTable)
@@ -30,6 +36,7 @@ const AddTablesToNavBar = async function() {
 }
 
 
+// getting name for table 
 const GetDataForTable = async function(CurrentTable) {
 
 
@@ -92,7 +99,7 @@ const GetDataForTable = async function(CurrentTable) {
     })
 }
 
-//adding KeyBoard event to page
+//adding KeyBoard event to page, to send SQL query from input with Enter
 window.addEventListener("keydown", async(e) => {
     var elem = document.querySelector(".RawSQLInput");
     var DataTable = document.querySelector(".DataTable")
@@ -112,30 +119,43 @@ window.addEventListener("keydown", async(e) => {
             }),
         })
 
-        var data = await response.json();
+        try {
 
-        data.forEach((arr) => {
-            var elementAAA = document.createElement("tr")
-            arr.forEach(
-                (DataValue) => {
-                    var valueAAA = document.createElement("td")
-                    valueAAA.innerHTML = DataValue
-                    elementAAA.appendChild(valueAAA)
+            var data = await response.json();
 
-                }
-            )
-            DataTable.appendChild(elementAAA)
-        })
+            data.forEach((arr) => {
+                var elementAAA = document.createElement("tr")
+                arr.forEach(
+                    (DataValue) => {
+                        var valueAAA = document.createElement("td")
+                        valueAAA.innerHTML = DataValue
+                        elementAAA.appendChild(valueAAA)
+
+                    }
+                )
+                DataTable.appendChild(elementAAA)
+            })
+
+        } catch (e) {
+            alert("Error in SQL query")
+        }
 
 
 
-
+        elem.value = ""
 
 
 
     }
-});
 
+
+})
+
+
+
+
+
+//reading data from table
 const ReadTable = async function(NameOfTable) {
 
     var DataTable = document.querySelector(".DataTable")
