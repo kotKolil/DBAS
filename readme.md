@@ -1,5 +1,5 @@
 ## DBAS - DB Admining System
-<img src="./other/preview.jpg">
+<img src="./other/preview.JPG">
 DBAS is a user-friendly graphical client designed to simplify database management tasks. It features a clean interface and robust functionality, making it ideal for both beginners and experienced database administrators.
 
 Key Features:
